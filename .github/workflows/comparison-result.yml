@@ -24,7 +24,7 @@ env:
 
 jobs:
   start_workflow:
-    runs-on: ubuntu-24.04 # We are version-locking this to avoid breaking changes in the future
+    runs-on: ubuntu-22.04 # We are version-locking this to avoid breaking changes in the future
     steps:
       - name: Send message to slack
         id: initial-message
