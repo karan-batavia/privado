@@ -94,3 +94,6 @@ A Data Safety Report is a privacy form needed to publish any Android app on the 
 
 # Contribute
 Please check out our [contribution page](https://docs.privado.ai/extra/contributing) if you love this project and would like to contribute.
+
+
+
