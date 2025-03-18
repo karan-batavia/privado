@@ -58,13 +58,6 @@ jobs:
           path: ./temp/standalone-monitoring-stability
           ref: main
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
       - name: Run the script for ${{ env.HEAD_REF }} and ${{ env.BASE_REF }}
         run: cd ./temp/standalone-monitoring-stability && pip install -r requirements.txt && python3 ./run.py -r ./repos/${{matrix.language}}.txt -rbb ${{ env.BASE_REF }} -rbh ${{ env.HEAD_REF }} -brr ${{ env.BASE_RULE_URL }} -hrr ${{ env.HEAD_RULE_URL }} -guf -urc
 
