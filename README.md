@@ -83,7 +83,7 @@ Privado will discover the following information in the code during scanning and 
 -   Issues
     
 # What can I do with Privado?
-Apart from getting a comprehensive outlook of your data practices for Privacy Audits, you can also use the tool to generate various privacy reports to comply with privacy laws like GDPR and CCPA.
+Apart from getting a comprehensive outlook of your data practices for Privacy Audits, you can also use the tool to generate various privacy reports to comply with privacy laws like GDPR and CCPA.   
 
 ## Record of Processing Activity ( ROPA ) Report
 
