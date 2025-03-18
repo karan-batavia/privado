@@ -23,11 +23,10 @@ env:
 
 
 jobs:
-setup_and_scan:
+  setup_and_scan:
     permissions: # Need these permissions for the job to create a JWT to authenticate with AWS
       id-token: 'write'
       contents: 'read'
-    needs: start_workflow
     strategy:
       matrix:
         language: ['java-1', 'java-2' ,'python', 'js', 'ruby-1', 'ruby-2', 'go', 'kotlin', 'php', 'csharp']
@@ -138,7 +137,7 @@ setup_and_scan:
         run: exit 1
 
   collate_summary:
-    needs: [start_workflow, setup_and_scan]
+    needs: setup_and_scan
     runs-on: ubuntu-latest
     steps:
       - name: Download summary file
@@ -170,7 +169,6 @@ setup_and_scan:
       - name: Send summary to slack
         uses: slackapi/slack-github-action@v1.27.0
         with:
-          update-ts: ${{needs.start_workflow.outputs.init_message_ts}}
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-message: "\nComparison Results generated on ${{ env.REPOSITORY_NAME }} by PR ${{ env.PR_NUMBER }} from branch ${{ env.HEAD_REF }} to ${{ env.BASE_REF }} \nPR link ${{ env.PR_URL }}\nLanguage: All \nSummary Report:\n ${{ env.MESSAGE }}"
         env:
