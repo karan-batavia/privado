@@ -23,24 +23,7 @@ env:
 
 
 jobs:
-  start_workflow:
-    runs-on: ubuntu-22.04 # We are version-locking this to avoid breaking changes in the future
-    steps:
-      - name: Send message to slack
-        id: initial-message
-        uses: slackapi/slack-github-action@v1.27.0
-        with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          slack-message : "Comparison workflow started for ${{env.PR_URL}}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
-
-      - name: Save output to env
-        id: save-output
-        run: echo "INIT_MSG_TS=${{ steps.initial-message.outputs.ts }}" >> $GITHUB_OUTPUT
-    outputs:
-      init_message_ts: ${{steps.save-output.outputs.INIT_MSG_TS}}
-  setup_and_scan:
+setup_and_scan:
     permissions: # Need these permissions for the job to create a JWT to authenticate with AWS
       id-token: 'write'
       contents: 'read'
@@ -49,7 +32,7 @@ jobs:
       matrix:
         language: ['java-1', 'java-2' ,'python', 'js', 'ruby-1', 'ruby-2', 'go', 'kotlin', 'php', 'csharp']
     continue-on-error: true
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: Install JDK-18
