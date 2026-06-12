@@ -56,7 +56,7 @@ local.properties
 .texlipse
 
 # STS (Spring Tool Suite)
-.springBeans
+.springBeans     
 
 # Code Recommenders
 .recommenders/
